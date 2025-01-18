@@ -1,14 +1,14 @@
 #!/bin/bash
 set -e 
 
-RN_VER=0.72.15
-RNFB_VER=18.1.0
-FB_IOS_VER=10.11.0
-FB_ANDROID_VER=32.1.1
-FB_GRADLE_SERVICES_VER=4.3.15 # Test 5.0.0 ?
+RN_VER=0.76.1
+RNFB_VER=21.2.0
+FB_IOS_VER=11.4.2
+FB_ANDROID_VER=33.5.1
+FB_GRADLE_SERVICES_VER=4.4.2 # Test 5.0.0 ?
 FB_GRADLE_PERF_VER=1.4.2
-FB_GRADLE_CRASH_VER=2.9.6
-FB_GRADLE_APP_DIST_VER=4.0.0
+FB_GRADLE_CRASH_VER=3.0.2
+FB_GRADLE_APP_DIST_VER=5.0.0
 
 #######################################################################################################
 #######################################################################################################
@@ -42,7 +42,7 @@ if [ "$(uname)" == "Darwin" ]; then
   if [ "$XCODE_DEVELOPMENT_TEAM" == "" ]; then
     printf "\n\n\n\n\n**********************************\n\n\n\n"
     printf "You must set XCODE_DEVELOPMENT_TEAM environment variable to your team id to test macCatalyst"
-    printf "Try running it like: XCODE_DEVELOPMENT_TEAM=2W4T2B656C ./make-demo.sh (but with your id)"
+    printf "Try running it like: XCODE_DEVELOPMENT_TEAM=YYX2P3XVJ7 ./make-demo.sh (but with your id)"
     printf "Skipping macCatalyst test"
     printf "\n\n\n\n\n**********************************\n\n\n\n"
   fi
@@ -56,8 +56,8 @@ fi
 
 echo "Testing react-native ${RN_VER} + react-native-firebase ${RNFB_VER} + firebase-ios-sdk ${FB_IOS_VER} + firebase-android-sdk ${FB_ANDROID_VER}"
 
-if ! which yarn > /dev/null 2>&1; then
-  echo "This script uses yarn, please install yarn (for example \`npm i yarn -g\` and re-try"
+if ! YARN_VERSION=$(yarn --version|cut -f1 -d'.') || [ "$YARN_VERSION" != "4" ]; then
+  echo "This script uses yarn@^4+, please install yarn (for example \`corepack install -g yarn@^4\` and re-try"
   exit 1
 fi
 #######################################################################################################
@@ -71,7 +71,8 @@ fi
 
 # Initialize a fresh project.
 # We say "skip-install" because we control our ruby version and cocoapods (part of install) does not like it
-npm_config_yes=true npx @react-native-community/cli init rnfbdemo --skip-install --skip-git-init --version=${RN_VER}
+echo Y | yarn dlx @react-native-community/cli init rnfbdemo --pm yarn --package-name ${FB_ANDROID_PACKAGE_NAME} --skip-install --skip-git-init --version=${RN_VER}
+
 cd rnfbdemo
 
 # New versions of react-native include annoying Ruby stuff that forces use of old rubies. Obliterate.
@@ -82,7 +83,15 @@ fi
 # Now run our initial dependency install
 touch yarn.lock
 yarn
-npm_config_yes=true npx pod-install
+
+if [ "$(uname)" == "Darwin" ]; then
+  echo "Setting Apple PRODUCT_BUNDLE_IDENTIFIER to ${FB_IOS_PACKAGE_NAME}"
+  # It is difficult to change the Android package name, so we use it for init.
+  # The iOS name is trivial though, just a PRODUCT_BUNDLE_IDENTIFIER change in pbxproj
+  sed -i -e "s/${FB_ANDROID_PACKAGE_NAME}/${FB_IOS_PACKAGE_NAME}/"g ios/rnfbdemo.xcodeproj/project.pbxproj
+  rm -f ios/rnfbdemo.xcodeproj/project.pbxproj-e
+  npm_config_yes=true npx pod-install
+fi
 
 # At this point we have a clean react-native project. Absolutely stock from the upstream template.
 
@@ -153,10 +162,6 @@ if [ "$(uname)" == "Darwin" ]; then
   source virtualenv/bin/activate
   pip install pbxproj
 
-  # set PRODUCT_BUNDLE_IDENTIFIER to com.rnfbdemo
-  sed -i -e $'s/org.reactjs.native.example/com/' ios/rnfbdemo.xcodeproj/project.pbxproj
-  rm -f ios/rnfbdemo.xcodeproj/project.pbxproj-e
-
   # Add our Google Services file to the Xcode project
   pbxproj file ios/rnfbdemo.xcodeproj rnfbdemo/GoogleService-Info.plist --target rnfbdemo
 
@@ -208,6 +213,8 @@ echo "Setting up App Distribution - package, gradle plugin"
 yarn add "@react-native-firebase/app-distribution@${RNFB_VER}"
 sed -i -e $"s/dependencies {/dependencies {\n        classpath \"com.google.firebase:firebase-appdistribution-gradle:${FB_GRADLE_APP_DIST_VER}\"/" android/build.gradle
 rm -f android/build.gradle??
+sed -i -e $'s/"com.google.gms.google-services"/"com.google.gms.google-services"\\\napply plugin: "com.google.firebase.appdistribution"/' android/app/build.gradle
+rm -f android/app/build.gradle??
 
 # Required for Firestore - android build tweak - or gradle runs out of memory during the build
 echo "Increasing memory available to gradle for android java build"
@@ -236,16 +243,16 @@ rm -f ios/Podfile??
 # Optional: build performance optimization to use ccache - asks xcodebuild to use clang and clang++ without the fully-qualified path
 # That means that you can then make a symlink in your path with clang or clang++ and have it use a different binary
 # In that way you can install ccache or buildcache and get much faster compiles...
-sed -i -e $'s/post_install do |installer|/post_install do |installer|\\\n    installer.pods_project.targets.each do |target|\\\n      target.build_configurations.each do |config|\\\n        config.build_settings["CC"] = "clang"\\\n        config.build_settings["LD"] = "clang"\\\n        config.build_settings["CXX"] = "clang++"\\\n        config.build_settings["LDPLUSPLUS"] = "clang++"\\\n      end\\\n    end\\\n/' ios/Podfile
+sed -i -e $'s/# :ccache_enabled/:ccache_enabled/' ios/Podfile
 rm -f ios/Podfile??
 
 # Optional: Cleaner build logs - libevent pulled in by react core items are ridiculously noisy otherwise
 sed -i -e $'s/post_install do |installer|/post_install do |installer|\\\n    installer.pods_project.targets.each do |target|\\\n      target.build_configurations.each do |config|\\\n        config.build_settings["GCC_WARN_INHIBIT_ALL_WARNINGS"] = "YES"\\\n      end\\\n    end\\\n/' ios/Podfile
 rm -f ios/Podfile??
 
-# Test: Copy in our demonstrator App.tsx
-echo "Copying demonstrator App.tsx"
-rm ./App.tsx && cp ../App.tsx ./App.tsx
+# Test: Copy in our demonstrator App.tsx and index.js
+echo "Copying demonstrator App.tsx and index.js"
+rm ./App.tsx ./index.js && cp ../App.tsx ./App.tsx && cp ../index.js ./index.js
 
 # Test: You have to re-run patch-package after yarn since it is not integrated into postinstall
 echo "Running any patches necessary to compile successfully"
