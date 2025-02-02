@@ -2089,10 +2089,10 @@
   resolved "https://registry.yarnpkg.com/@react-native-firebase/database/-/database-21.2.0.tgz#75bb4cb9b3d0aba5437736f68a87b27a2191ca2f"
   integrity sha512-cyu1AVXN6mqOBeL43Q6AYXFV4nYiuCTbLr82FeeFfwiYHg5NhxmPU3CDq8v7mh/P3DY5MNyYECeUxDC+bXRCIQ==
 
-"@react-native-firebase/dynamic-links@21.2.0":
-  version "21.2.0"
-  resolved "https://registry.yarnpkg.com/@react-native-firebase/dynamic-links/-/dynamic-links-21.2.0.tgz#e6590317675ce12b4a1dc98a004d57f5e9780d3f"
-  integrity sha512-fnkBIqRKFNqC4oDBs3PE39bAgVjyPLco2+0g6yIR8gg1AGUN2LClEbG2NeeknSueG2n5zniShJsDd+gPPrNlUg==
+"@react-native-firebase/dynamic-links@21.6.2":
+  version "21.6.2"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/dynamic-links/-/dynamic-links-21.6.2.tgz#fa4bda6dd7756579bc0d56b1eaefd5fd856af9c1"
+  integrity sha512-KXO8KkOksXN3RsyhRJ9INZSyRtn+L5lSMOoMZmHNZJzDA4Eg+n849TjKxnaPNep5kEvyM7HmyLzsiHRJXnICzA==
 
 "@react-native-firebase/firestore@21.2.0":
   version "21.2.0"
