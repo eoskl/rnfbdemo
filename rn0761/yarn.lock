@@ -2052,10 +2052,10 @@
   resolved "https://registry.yarnpkg.com/@react-native-firebase/analytics/-/analytics-21.2.0.tgz#724d756edac29070aa1435e7c057ef31c84986a1"
   integrity sha512-iZ48AVk/Ti7jxk9TP4pRZ+D1dxV+t0aMx4xPL0iVHoSgF+Imp5Wa7dfJ+IFHn0gEybRYNqqo671cwRgGuKuzpQ==
 
-"@react-native-firebase/app-check@21.2.0":
-  version "21.2.0"
-  resolved "https://registry.yarnpkg.com/@react-native-firebase/app-check/-/app-check-21.2.0.tgz#e57a3faa251e311ada25d5fda539edb1a971cf0e"
-  integrity sha512-RO8jHWmLCe9xJD/yW8woKBRLwUrfCYKjoQXnJOVl2ba84766S8AOd8GXT58h24b9Bpf35OiIOSqzYx7eSR6pAg==
+"@react-native-firebase/app-check@21.6.2":
+  version "21.6.2"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/app-check/-/app-check-21.6.2.tgz#e146f47f834f6178b13712542f5eff9bb509a7f4"
+  integrity sha512-3xhtxsLXIwMb9bhG/b1PPypOcLkRD2ECjJrklClBE+x5x7oeuFq2hhE1/uddPB1UF59bJ9BSwxqp6MaMv91xcg==
 
 "@react-native-firebase/app-distribution@21.2.0":
   version "21.2.0"
