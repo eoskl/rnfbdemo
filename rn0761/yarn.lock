@@ -2070,10 +2070,10 @@
     firebase "10.13.2"
     superstruct "^0.6.2"
 
-"@react-native-firebase/auth@21.2.0":
-  version "21.2.0"
-  resolved "https://registry.yarnpkg.com/@react-native-firebase/auth/-/auth-21.2.0.tgz#04ba47c0213ca19404d61154b24d4a862d4ae759"
-  integrity sha512-dC9EwXZTk+DPL0OGv9JsZnrsiG+V0xfPozYigwlvdWtevVd2bCbHDbZd4TFDuV+AtM1AIxWKAflUw0kLIcBDew==
+"@react-native-firebase/auth@21.6.2":
+  version "21.6.2"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/auth/-/auth-21.6.2.tgz#b7cc5d162c0ffe466a6e4c9cb550474fb1488a60"
+  integrity sha512-/U8V7B063ShawbEomgq9fzl8mk4eJfWP+f3rxRrIjVAl6AQTIWBbLZ2qFThQpmD5X5YKHX2z1NnZ+DVNVQHDjA==
   dependencies:
     plist "^3.1.0"
 
