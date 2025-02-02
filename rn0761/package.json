@@ -19,7 +19,7 @@
     "@react-native-firebase/database": "21.2.0",
     "@react-native-firebase/dynamic-links": "21.2.0",
     "@react-native-firebase/firestore": "21.2.0",
-    "@react-native-firebase/functions": "21.2.0",
+    "@react-native-firebase/functions": "21.6.2",
     "@react-native-firebase/in-app-messaging": "21.2.0",
     "@react-native-firebase/installations": "21.2.0",
     "@react-native-firebase/messaging": "21.2.0",
