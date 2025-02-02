@@ -2077,10 +2077,10 @@
   dependencies:
     plist "^3.1.0"
 
-"@react-native-firebase/crashlytics@21.2.0":
-  version "21.2.0"
-  resolved "https://registry.yarnpkg.com/@react-native-firebase/crashlytics/-/crashlytics-21.2.0.tgz#0bab9baf26a2c3eedbd8c4a26d201fa74c3b72fb"
-  integrity sha512-4c0jg+fyns1VEqR7Y4Jr+0w+/QePKk4fReee8oHv+FvHVJgwWNp9gkFCQC8fX2+OnAFN+N94i9eIQOBIJFukGQ==
+"@react-native-firebase/crashlytics@21.6.2":
+  version "21.6.2"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/crashlytics/-/crashlytics-21.6.2.tgz#248e37490b409d349521f00b48ac6a1ca70ff97b"
+  integrity sha512-L3WyVrk//WsOmxQQVjZ6MNBmv7o9x90K36GNCKa1uLsHcPIOKbyTzCBKjIQdNofpdBYWWj8AZD9HBwwohh2+ow==
   dependencies:
     stacktrace-js "^2.0.2"
 
