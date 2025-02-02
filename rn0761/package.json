@@ -10,7 +10,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@react-native-firebase/analytics": "21.2.0",
+    "@react-native-firebase/analytics": "21.6.2",
     "@react-native-firebase/app": "21.2.0",
     "@react-native-firebase/app-check": "21.2.0",
     "@react-native-firebase/app-distribution": "21.2.0",

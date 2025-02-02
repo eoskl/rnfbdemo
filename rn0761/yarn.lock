@@ -2047,10 +2047,12 @@
     prompts "^2.4.2"
     semver "^7.5.2"
 
-"@react-native-firebase/analytics@21.2.0":
-  version "21.2.0"
-  resolved "https://registry.yarnpkg.com/@react-native-firebase/analytics/-/analytics-21.2.0.tgz#724d756edac29070aa1435e7c057ef31c84986a1"
-  integrity sha512-iZ48AVk/Ti7jxk9TP4pRZ+D1dxV+t0aMx4xPL0iVHoSgF+Imp5Wa7dfJ+IFHn0gEybRYNqqo671cwRgGuKuzpQ==
+"@react-native-firebase/analytics@21.6.2":
+  version "21.6.2"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/analytics/-/analytics-21.6.2.tgz#79471f8292731325103e94026b476865c8e3d3e9"
+  integrity sha512-tOrYGf5F+ijJOr584EBGndE9lFe7VHY4eaSCAibMq3iuDyL6NVgAuZvaB9u2zE/wvcGyGCu9l8GWgimjrjTs8w==
+  dependencies:
+    superstruct "^2.0.2"
 
 "@react-native-firebase/app-check@21.2.0":
   version "21.2.0"
@@ -6899,6 +6901,11 @@ superstruct@^0.6.2:
   dependencies:
     clone-deep "^2.0.1"
     kind-of "^6.0.1"
+
+superstruct@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/superstruct/-/superstruct-2.0.2.tgz#3f6d32fbdc11c357deff127d591a39b996300c54"
+  integrity sha512-uV+TFRZdXsqXTL2pRvujROjdZQ4RAlBUS5BTh9IGm+jTqQntYThciG/qu57Gs69yjnVUSqdxF9YLmSnpupBW9A==
 
 supports-color@^7.1.0:
   version "7.2.0"
